@@ -1,0 +1,41 @@
+/* AMZ Profile Store: متجر مستقل؛ لا يعيد بناء عناصر الملف الشخصي الأصلية */
+.amz-store{direction:rtl;color:var(--text_color,#eee);font-family:inherit;padding:12px;}
+.amz-store-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 4px 15px;border-bottom:1px solid rgba(255,255,255,.12);}
+.amz-store-title{font-size:19px;font-weight:900;}
+.amz-store-gold{border-radius:30px;padding:8px 12px;background:linear-gradient(135deg,#fff0bd,#ffbd36);color:#613b00;font-weight:900;white-space:nowrap;}
+.amz-store-tabs{display:flex;gap:7px;overflow:auto;padding:12px 0;}
+.amz-store-tab{border:0;border-radius:9px;padding:9px 13px;background:rgba(255,255,255,.08);color:inherit;white-space:nowrap;cursor:pointer;}
+.amz-store-tab.active{background:linear-gradient(135deg,#7b35db,#e73592);color:#fff;}
+.amz-store-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:11px;}
+.amz-store-card{min-width:0;overflow:hidden;border-radius:13px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.10);}
+.amz-store-preview{width:100%;height:116px;object-fit:cover;display:block;background:linear-gradient(135deg,#171526,#30204c);}
+.amz-store-cardbody{padding:10px;}
+.amz-store-name{font-weight:800;margin-bottom:6px;overflow-wrap:anywhere;}
+.amz-store-price{font-size:12px;opacity:.8;margin-bottom:10px;}
+.amz-store-btn{width:100%;border:0;border-radius:8px;padding:8px 6px;background:linear-gradient(135deg,#7c3aed,#d946a4);color:#fff;font-weight:800;cursor:pointer;}
+.amz-store-btn.secondary{background:rgba(255,255,255,.13);}
+.amz-store-btn:disabled{opacity:.55;cursor:not-allowed;}
+.amz-store-empty{padding:24px;text-align:center;opacity:.7;}
+.amz-store-note{font-size:12px;line-height:1.8;opacity:.75;margin:12px 2px;}
+/* شفافية خلفيات مكونات الملف الشخصي 20% مع بقاء النصوص والصور بعتامة كاملة */
+#large_modal_content.amz-profile-store-bg .pro_menu_wrap,
+#large_modal_content.amz-profile-store-bg #mprofilemenu,
+#large_modal_content.amz-profile-store-bg .modal_menu,
+#large_modal_content.amz-profile-store-bg .modal_zone,
+#large_modal_content.amz-profile-store-bg .proitem,
+#large_modal_content.amz-profile-store-bg .blisting,
+#large_modal_content.amz-profile-store-bg .info_item,
+#large_modal_content.amz-profile-store-bg .profile_info_box{background:rgba(18,18,29,.20)!important;background-image:none!important;}
+#large_modal_content.amz-profile-store-bg .modal_wrap_top{background-color:transparent!important;background-image:none!important;}
+#proav[data-amz-profile-frame]:not([data-amz-profile-frame=""]){position:relative;}
+#proav[data-amz-profile-frame]:not([data-amz-profile-frame=""])::after{content:"";position:absolute;inset:-8px;background-image:var(--amz-profile-frame);background-size:100% 100%;background-position:center;background-repeat:no-repeat;pointer-events:none;z-index:5;}
+@media(max-width:480px){.amz-store{padding:8px}.amz-store-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.amz-store-preview{height:98px}.amz-store-title{font-size:16px}}
+
+/* AMZ RGB Premium baseline adapted from the supplied style file. All profile panel fills remain at 20% opacity. */
+@keyframes amzRgbShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes amzRgbGlow{0%,100%{box-shadow:0 0 18px rgba(180,130,255,.36),0 0 34px rgba(255,85,150,.16)}50%{box-shadow:0 0 32px rgba(180,130,255,.52),0 0 58px rgba(75,190,255,.28)}}
+#large_modal_content.amz-profile-store-bg{animation:amzRgbGlow 8s ease-in-out infinite;}
+#large_modal_content.amz-profile-store-bg .pro_menu_wrap{background:linear-gradient(135deg,rgba(42,27,61,.20),rgba(61,31,58,.20),rgba(31,58,61,.20),rgba(42,42,77,.20))!important;background-size:400% 400%!important;animation:amzRgbShift 15s ease infinite;border-top:1px solid rgba(255,255,255,.14);border-bottom:1px solid rgba(255,255,255,.14);}
+#large_modal_content.amz-profile-store-bg #proav::before{content:"";position:absolute;inset:-6px;border-radius:50%;padding:4px;background:linear-gradient(45deg,#ff0055,#7000ff,#00c3ff,#00ff88,#ff8800,#ff0055);background-size:300% 300%;animation:amzRgbShift 4s linear infinite;box-shadow:0 0 20px rgba(112,0,255,.48);pointer-events:none;z-index:3;}
+#large_modal_content.amz-profile-store-bg .proitem{transition:background-color .25s ease,box-shadow .25s ease;}
+#large_modal_content.amz-profile-store-bg .proitem:hover{background:rgba(255,255,255,.20)!important;box-shadow:0 0 14px rgba(112,0,255,.18);}

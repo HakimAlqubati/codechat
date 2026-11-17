@@ -1,0 +1,37 @@
+.chat_alert_badge{
+    display:none;
+    min-width:17px;
+    height:17px;
+    line-height:17px;
+    padding:0 4px;
+    border-radius:20px;
+    background:#dc3545;
+    color:#fff;
+    font-size:10px;
+    font-weight:700;
+    text-align:center;
+    position:absolute;
+    top:2px;
+    right:2px;
+    z-index:3;
+}
+.chat_alert_menu_item{position:relative;}
+.chat_alert_news_wrap{margin:0 0 18px 0;padding:0 0 8px 0;}
+.chat_alert_news_heading{font-size:14px;font-weight:700;margin:0 0 10px 0;padding:9px 12px;border-radius:7px;background:rgba(125,85,220,.16);border:1px solid rgba(125,85,220,.32);}
+.chat_alert_news_heading i{margin-inline-end:7px;}
+.chat_alert_card{display:block;padding:13px;margin:0 0 10px 0;border-radius:8px;background:rgba(125,85,220,.09);border:1px solid rgba(125,85,220,.3);border-inline-start:4px solid #8b5cf6;}
+.chat_alert_card_top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;}
+.chat_alert_tag{font-size:11px;font-weight:700;color:#a78bfa;}
+.chat_alert_date{font-size:10px;opacity:.72;white-space:nowrap;}
+.chat_alert_sender{font-size:12px;font-weight:700;margin-bottom:5px;}
+.chat_alert_title{font-size:14px;font-weight:700;margin:3px 0 7px 0;}
+.chat_alert_message{font-size:13px;line-height:1.7;overflow-wrap:anywhere;white-space:normal;}
+.chat_alert_compose{padding:14px;margin-bottom:18px;border-radius:8px;background:rgba(125,85,220,.07);border:1px solid rgba(125,85,220,.25);}
+.chat_alert_section_title{font-weight:700;font-size:14px;margin-bottom:12px;}
+.chat_alert_section_title i{margin-inline-end:6px;color:#a78bfa;}
+.chat_alert_compose .setting_element{margin-bottom:12px;}
+.chat_alert_compose .full_select,.chat_alert_compose .full_input,.chat_alert_compose .full_textarea{width:100%;box-sizing:border-box;}
+.chat_alert_check{display:flex;align-items:center;gap:8px;font-size:12px;margin:8px 0;cursor:pointer;}
+.chat_alert_hint{font-size:11px;line-height:1.5;margin:7px 0 12px 0;}
+.chat_alert_list_head{margin:12px 0;}
+.chat_alert_list_head .sub_text{display:block;font-size:11px;line-height:1.5;margin-top:4px;}

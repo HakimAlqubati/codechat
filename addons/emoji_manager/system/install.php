@@ -1,0 +1,4 @@
+<?php
+if(!defined('BOOM')){ die(); }
+$ad = array('name'=>'emoji_manager','access'=>100,'custom1'=>'1','custom2'=>'','custom3'=>'','custom4'=>'','custom5'=>'','custom6'=>'','custom7'=>'','custom8'=>'','custom9'=>'','custom10'=>'');
+?>

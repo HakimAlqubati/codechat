@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#007bff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0056b3;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffb300;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e91e63;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c2185b;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="40" cy="40" r="38" fill="url(#grad1)" stroke="#fff" stroke-width="2"/>
+  
+  <!-- User icon -->
+  <circle cx="40" cy="25" r="8" fill="#fff"/>
+  <path d="M 20 60 Q 20 45 40 45 Q 60 45 60 60" fill="#fff"/>
+  
+  <!-- Admin crown -->
+  <path d="M 25 20 L 35 15 L 40 25 L 45 15 L 55 20 L 52 30 L 28 30 Z" fill="url(#grad2)"/>
+  <circle cx="28" cy="25" r="2" fill="#fff"/>
+  <circle cx="40" cy="20" r="2" fill="#fff"/>
+  <circle cx="52" cy="25" r="2" fill="#fff"/>
+  
+  <!-- Ruby gem -->
+  <path d="M 60 45 L 65 50 L 60 55 L 55 50 Z" fill="url(#grad3)"/>
+  <path d="M 55 50 L 60 45 L 65 50 L 60 55 Z" fill="#fff" opacity="0.3"/>
+  
+  <!-- Gold coins -->
+  <circle cx="15" cy="45" r="3" fill="url(#grad2)"/>
+  <circle cx="18" cy="48" r="2" fill="url(#grad2)"/>
+  <circle cx="12" cy="48" r="2" fill="url(#grad2)"/>
+  
+  <!-- Level star -->
+  <path d="M 65 25 L 67 30 L 72 30 L 68 33 L 70 38 L 65 35 L 60 38 L 62 33 L 58 30 L 63 30 Z" fill="url(#grad2)"/>
+</svg>

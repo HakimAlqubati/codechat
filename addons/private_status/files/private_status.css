@@ -1,0 +1,77 @@
+/* CodyChat Private Status add-on. Scoped to the private-chat panel only. */
+#private_name .ps-presence-line {
+    display: block;
+    width: 100%;
+    margin-top: 1px;
+    font-size: 11px;
+    line-height: 14px;
+    font-weight: 500;
+    text-align: right;
+    direction: rtl;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    opacity: .92;
+}
+#private_name .ps-presence-line.ps-online { color: #26c987; }
+#private_name .ps-presence-line.ps-last-seen { color: var(--sub-color, #9a9a9a); }
+#ptyping {
+    left: auto !important;
+    right: 12px !important;
+    bottom: 5px !important;
+    width: auto !important;
+    z-index: 30;
+    padding: 0 !important;
+    pointer-events: none;
+}
+#ptyping #ptyping_avatar { display: none !important; }
+#ptyping #ptyping_text { width: auto !important; height: auto !important; padding: 0 !important; }
+#ptyping .ps-typing-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    min-height: 28px;
+    padding: 5px 12px;
+    border-radius: 18px;
+    background: rgba(105, 74, 153, .16);
+    border: 1px solid rgba(155, 121, 208, .24);
+    color: var(--theme-color, #a983e6);
+    font-size: 12px;
+    font-weight: 600;
+    box-shadow: 0 2px 9px rgba(0,0,0,.08);
+    direction: rtl;
+}
+#ptyping .ps-typing-dots { display: inline-flex; align-items: center; gap: 3px; }
+#ptyping .ps-typing-dots i {
+    display: block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: .45;
+    animation: psTypingDot 1.15s infinite ease-in-out;
+}
+#ptyping .ps-typing-dots i:nth-child(2) { animation-delay: .16s; }
+#ptyping .ps-typing-dots i:nth-child(3) { animation-delay: .32s; }
+@keyframes psTypingDot {
+    0%, 60%, 100% { transform: translateY(0); opacity: .38; }
+    30% { transform: translateY(-4px); opacity: 1; }
+}
+.ps-private-receipt {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    margin-inline-start: 5px;
+    font-size: 10px;
+    line-height: 1;
+    white-space: nowrap;
+    vertical-align: middle;
+    color: #9696a0;
+}
+.ps-private-receipt .ps-tick { font-size: 11px; letter-spacing: -3px; }
+.ps-private-receipt.ps-delivered { color: #a0a0aa; }
+.ps-private-receipt.ps-read { color: #2799ec; }
+.ps-private-receipt .ps-read-label { font-size: 10px; letter-spacing: 0; margin-inline-start: 2px; }
+@media (prefers-reduced-motion: reduce) {
+    #ptyping .ps-typing-dots i { animation: none; opacity: .8; }
+}

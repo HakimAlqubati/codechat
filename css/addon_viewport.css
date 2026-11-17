@@ -1,0 +1,68 @@
+/* Full-page add-on screens only. Compact popups keep CodyChat's original sizing. */
+body.boom-chat-viewport .addon-full-page-modal {
+    position: fixed !important;
+    top: var(--addon-viewport-top, 50px) !important;
+    right: 0 !important;
+    bottom: var(--addon-viewport-bottom, 50px) !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    z-index: 1001 !important;
+}
+
+body.boom-chat-viewport .addon-full-page-modal .addon-full-page-in {
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    max-height: 100% !important;
+    min-height: 0 !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
+body.boom-chat-viewport .addon-full-page-modal .addon-full-page-content {
+    position: relative;
+    z-index: 1;
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    height: 100% !important;
+    max-height: none !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    cursor: auto;
+}
+
+body.boom-chat-viewport .addon-full-page-modal .addon-full-page-content > * {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+@supports (height: 100dvh) {
+    body.boom-chat-viewport .addon-full-page-modal {
+        max-height: calc(100dvh - var(--addon-viewport-top, 50px) - var(--addon-viewport-bottom, 50px)) !important;
+    }
+}
+
+@media (max-width: 600px) {
+    body.boom-chat-viewport .addon-full-page-modal .addon-full-page-in {
+        width: 100% !important;
+    }
+}
