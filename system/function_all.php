@@ -5560,6 +5560,11 @@ function callData($type){
 }
 function writeDomain($domain){
 	global $setting;
+	$env_path = BOOM_PATH . '/.env';
+	if(file_exists($env_path) && function_exists('boomWriteEnv')){
+		boomWriteEnv(['BOOM_DOMAIN' => $domain]);
+		return;
+	}
 	$file_path = BOOM_PATH . '/system/database.php';
 	$file_content = file_get_contents($file_path);
 	$updated_content = preg_replace(

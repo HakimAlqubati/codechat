@@ -4,7 +4,7 @@ require("controller.php");
 require("function.php");
 require("function_all.php");
 require('function_sranking.php');
-require('settings.php');
+require('settings_loader.php');
 require('function_redis.php');
 
 mysqli_report(MYSQLI_REPORT_OFF);

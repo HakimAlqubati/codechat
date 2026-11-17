@@ -1,7 +1,7 @@
 <?php
 require_once('../config_install.php');
 
-if ($check_install != 0) {
+if (defined('BOOM_INSTALL') && BOOM_INSTALL != 0) {
     exit;
 }
 
@@ -32,7 +32,7 @@ exit;
 
 function processInstall()
 {
-    global $mysqli, $HT_LIC;
+    global $mysqli;
     require "../../system/template/data_template.php";
     $username = escape($_POST["username"]);
     $email = escape($_POST["email"]);
@@ -45,7 +45,7 @@ function processInstall()
 	$host = isset($parsedUrl['host']) ? $parsedUrl['host'] : '';
 	$path = isset($parsedUrl['path']) ? $parsedUrl['path'] : '';
 	$prefixBase = strtolower(preg_replace('/[^a-zA-Z0-9]+/', '_', $host . $path));
-	$prefix = trim($prefixBase, '_') . '_';	$__SECURE_HUNTER = ["lic" => $HT_LIC];
+	$prefix = trim($prefixBase, '_') . '_';
     if ($password != $repeat) {
         return boomCode(0, ["error" => "Password are not matching please verify and try again"]);
     }
@@ -64,8 +64,6 @@ function processInstall()
     $time = time();
     $encrypt = str_shuffle("HUNTER---" . md5(rand(1000000, 9999999)));
     $password = boomEncrypt($password, $encrypt);
-    $check = json_decode($result);
-    $dbcode = $check->config;
 $mysqli->query("CREATE TABLE `boom_act` (`act_user` INT NOT NULL DEFAULT '0', `act_name` varchar(100) NOT NULL DEFAULT '', `act_time` INT NOT NULL DEFAULT '0', KEY `act_name` (`act_name`), KEY `act_user` (`act_user`), KEY `act_time` (`act_time`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;");
 $mysqli->query("CREATE TABLE `boom_addons` (`addons_id` INT NOT NULL AUTO_INCREMENT, `addons` varchar(100) NOT NULL DEFAULT '', `addons_load` INT NOT NULL DEFAULT '0', `addons_key` varchar(100) NOT NULL DEFAULT '', `addons_access` INT NOT NULL DEFAULT '0', `bot_name` varchar(100) NOT NULL DEFAULT '', `bot_id` INT NOT NULL DEFAULT '0', `custom1` varchar(1000) NOT NULL DEFAULT '', `custom2` varchar(1000) NOT NULL DEFAULT '', `custom3` varchar(1000) NOT NULL DEFAULT '', `custom4` varchar(1000) NOT NULL DEFAULT '', `custom5` varchar(1000) NOT NULL DEFAULT '', `custom6` varchar(1000) NOT NULL DEFAULT '', `custom7` varchar(1000) NOT NULL DEFAULT '', `custom8` varchar(1000) NOT NULL DEFAULT '', `custom9` varchar(1000) NOT NULL DEFAULT '', `custom10` varchar(4000) NOT NULL DEFAULT '', PRIMARY KEY (`addons_id`)) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;");
 $mysqli->query("CREATE TABLE `boom_banned` (`id` INT NOT NULL AUTO_INCREMENT, `ip` varchar(100) NOT NULL DEFAULT '', `ban_user` INT NOT NULL DEFAULT '0', PRIMARY KEY (`id`), KEY `ip` (`ip`), KEY `ban_user` (`ban_user`)) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;");
@@ -135,9 +133,25 @@ $database_write = "<?php\r\n" .
 "define('BOOM', 1);\r\n" .
 "?>";
 
-$database_file = fopen(BOOM_PATH . "/system/database.php", "w+");
-fwrite($database_file, $database_write);
-fclose($database_file);
+$wroteEnv = (file_exists(BOOM_PATH . '/.env') || is_writable(BOOM_PATH)) && function_exists('boomWriteEnv') && boomWriteEnv([
+    'BOOM_PREFIX'   => $prefix,
+    'BOOM_DOMAIN'   => $domain . '/',
+    'REDIS_IP'      => defined('REDIS_IP') ? REDIS_IP : '127.0.0.1',
+    'REDIS_PORT'    => defined('REDIS_PORT') ? REDIS_PORT : 6379,
+    'REDIS_TIMEOUT' => defined('REDIS_TIMEOUT') ? REDIS_TIMEOUT : 0.2,
+    'REDIS_PASS'    => defined('REDIS_PASS') ? REDIS_PASS : '',
+    'BOOM_DHOST'    => $_POST["db_host"],
+    'BOOM_DUSER'    => $_POST["db_user"],
+    'BOOM_DPASS'    => $_POST["db_pass"],
+    'BOOM_DNAME'    => $_POST["db_name"],
+    'BOOM_CRYPT'    => $encrypt,
+    'BOOM_INSTALL'  => 1,
+]);
+if (!$wroteEnv) {
+    $database_file = fopen(BOOM_PATH . "/system/database.php", "w+");
+    fwrite($database_file, $database_write);
+    fclose($database_file);
+}
 
 $settings_write = "<?php\r\n";
 $settings_write .= "\$setting['id'] = '1';\r\n";
@@ -361,7 +375,7 @@ fclose($settings_file);
     $mysqli->query("INSERT INTO `boom_exp` (`uid`, `exp_current`, `exp_week`, `exp_month`, `exp_total`) VALUES ('1', '0', '0', '0', '0')");
 	$mysqli->query("INSERT INTO `boom_users` (user_id, user_name, user_ip, user_join, user_password, user_rank, user_tumb, user_bot) VALUES (2, 'System', '0.0.0.0', '" . $time . "', '" . randomPass() . "', '69', 'default_system.png', '1')");
     $mysqli->query("INSERT INTO boom_rooms ( room_id, room_name, room_system, room_action, room_creator ) VALUES (1, 'Main room', 1, '" . $time . "', '1')");
-    $mysqli->query("INSERT INTO `boom_page` (`page_id`, `page_name`, `page_content`) VALUES (1, 'terms_of_use', '" . $term_content . "'), (2, 'privacy_policy', '" . $privacy_content . "'), (3, 'rules', '" . $help_content . "')");
+    $mysqli->query("INSERT INTO `boom_page` (`page_id`, `page_name`, `page_content`) VALUES (1, 'terms_of_use', '" . $term_content . "'), (2, 'privacy_policy', '" . $privacy_content . "'), (3, 'rules', '" . $rules_content . "')");
     $mysqli->query("INSERT INTO boom_filter (word, word_type) VALUES\r\n\t('aol','email'),('att','email'),('comcast','email'),('facebook','email'),('gmail','email'),('gmx','email'),('googlemail','email'),('google','email'),('hotmail','email'),('mac','email'),('me','email'),('mail','email'),('msn','email'),('live','email'),('sbcglobal','email'),\r\n\t('verizon','email'),('yahoo','email'),('email','email'),('fastmail','email'),('games','email'),('hush','email'),('hushmail','email'),('icloud','email'),('iname','email'),('inbox','email'),('lavabit','email'),('love','email'),('outlook','email'),('pobox','email'),\r\n\t('protonmail','email'),('rocketmail','email'),('safe-mail','email'),('wow','email'),('ygm','email'),('ymail','email'),('zoho','email'),('yandex','email'),('bellsouth','email'),('charter','email'),('cox','email'),('earthlink','email'),('juno','email'),\r\n\t('btinternet','email'),('virginmedia','email'),('blueyonder','email'),('freeserve','email'),('ntlworld','email'),('o2','email'),('orange','email'),('sky','email'),('talktalk','email'),('tiscali','email'),('virgin','email'),('wanadoo','email'),\r\n\t('bt','email'),('sina','email'),('qq','email'),('naver','email'),('hanmail','email'),('daum','email'),('nate','email'),('laposte','email'),('gmx','email'),('sfr','email'),('neuf','email'),('free','email'),('online','email'),('t-online','email'),('web','email'),\r\n\t('libero','email'),('virgilio','email'),('alice','email'),('tin','email'),('poste','email'),('teletu','email'),('mail','email'),('rambler','email'),('ya','email'),('list','email'),('skynet','email'),('voo','email'),('tvcablenet','email'),('telenet','email'),\r\n\t('fibertel','email'),('speedy','email'),('arnet','email'),('prodigy.mx','email'),('uol','email'),('bol','email'),('terra','email'),('ig','email'),('itelefonica','email'),('r7','email'),('zipmail','email'),('globo','email'),('globomail','email'),('oi','email')\r\n\t");
     $mysqli->query("INSERT INTO `boom_gift` (`id`, `gift_image`, `gift_title`, `gift_method`, `gift_cost`, `gift_rank`) VALUES (1, 'clover.svg', 'Lucky clover', 1, 100, 1),\r\n(2, 'clown.svg', 'Clown face', 1, 100, 1),\r\n(3, 'coffee.svg', 'Hot coffee cup', 1, 100, 1),\r\n(4, 'cool.svg', 'Cool guy face', 1, 100, 1),\r\n(5, 'crown.svg', 'Nice crown', 1, 100, 1),\r\n(6, 'cure.svg', 'Magic potion', 1, 100, 1),\r\n(7, 'diamond.svg', 'Glossy diamond', 1, 100, 1),\r\n(8, 'fishbone.svg', 'Fish bones', 1, 100, 1),\r\n(9, 'flowers.svg', 'Flower bouquet', 1, 100, 1),\r\n(10, 'gift.svg', 'Gift box', 1, 100, 1),\r\n(11, 'goldpot.svg', 'Pot of gold', 1, 100, 1),\r\n(12, 'hot.svg', 'Hot fire flame', 1, 100, 1),\r\n(13, 'icecream.svg', 'Ice cream', 1, 100, 1),\r\n(14, 'karma.svg', 'Karma back', 1, 100, 1),\r\n(15, 'kiss.svg', 'Gentle kiss', 1, 100, 1),\r\n(16, 'like.svg', 'Tumbs up', 1, 100, 1),\r\n(17, 'love.svg', 'Love', 1, 100, 1),\r\n(18, 'lovepotion.svg', 'Love potion', 1, 100, 1),\r\n(19, 'loverepair.svg', 'Broken heart', 1, 100, 1),\r\n(20, 'medal.svg', 'Winner medal', 1, 100, 1),\r\n(21, 'money.svg', 'Pile of cash', 1, 100, 1),\r\n(22, 'pizza.svg', 'Pizza slice', 1, 100, 1),\r\n(23, 'poison.svg', 'Poison potion', 1, 100, 1),\r\n(24, 'power.svg', 'Energy potion', 1, 100, 1),\r\n(25, 'ring.svg', 'Expensive ring', 1, 100, 1),\r\n(26, 'rose.svg', 'Fresh rose', 1, 100, 1),\r\n(27, 'smile.svg', 'Smiley face', 1, 100, 1),\r\n(28, 'star.svg', 'Night star', 1, 100, 1),\r\n(29, 'teddy.svg', 'Teddy bear', 1, 100, 1),\r\n(30, 'trophy.svg', 'Gold trophy', 1, 100, 1),\r\n(31, 'voodoo.svg', 'Voodo doll', 1, 100, 1),\r\n(34, 'energy.svg', 'Power energy', 1, 100, 1)");
 	return boomCode(1);

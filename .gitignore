@@ -1,0 +1,46 @@
+# Environment configuration
+.env
+.env.*
+!.env.example
+
+# Generated system cache file (rebuilt automatically per environment)
+system/settings.php
+
+# Runtime user uploads & media (preserve .htaccess and index.php placeholders)
+avatar/*
+!avatar/.htaccess
+!avatar/index.php
+
+cover/*
+!cover/.htaccess
+!cover/index.php
+
+upload/chat/*
+!upload/chat/.htaccess
+!upload/chat/index.php
+
+upload/news/*
+!upload/news/.htaccess
+!upload/news/index.php
+
+upload/private/*
+!upload/private/.htaccess
+!upload/private/index.php
+
+upload/upload/*
+!upload/upload/.htaccess
+!upload/upload/index.php
+
+upload/wall/*
+!upload/wall/.htaccess
+!upload/wall/index.php
+
+upload/addon_page_appearance/*
+!upload/addon_page_appearance/.htaccess
+!upload/addon_page_appearance/index.php
+
+# OS & IDE files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

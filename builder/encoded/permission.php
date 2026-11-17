@@ -15,8 +15,11 @@ $requirements = array(
     "OpCache Enabled" => true
 );
 
+$dbConfigPath = file_exists(BOOM_PATH . "/.env")
+    ? (BOOM_PATH . "/.env")
+    : (is_writable(BOOM_PATH) ? BOOM_PATH : BOOM_PATH . "/system/database.php");
 $paths = array(
-    "system/database.php" => BOOM_PATH . "/system/database.php",
+    ".env / database config" => $dbConfigPath,
     "avatar directory" => BOOM_PATH . "/avatar",
     "cover directory" => BOOM_PATH . "/cover",
     "upload directory" => BOOM_PATH . "/upload"

@@ -4,7 +4,7 @@ require("database.php");
 require("controller.php");
 require("function.php");
 require('function_sranking.php');
-require('settings.php');
+require('settings_loader.php');
 require('function_redis.php');
 
 if(checkRateLimit()){
