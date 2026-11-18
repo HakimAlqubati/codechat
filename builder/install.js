@@ -159,8 +159,8 @@ $(document).ready(function() {
     }
   });
 
-  $(document).on('click', '.accept_install', function() {
-    var $i = $(this),
+  $(document).on('click', '.agreement', function() {
+    var $i = $(this).find('.accept_install'),
         on = $i.attr('value') === '1';
     $i.attr('value', on ? '0' : '1')
       .toggleClass('fa-circle fa-check-circle');

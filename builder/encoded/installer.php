@@ -10,7 +10,7 @@ if ($chat_install != 2) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Codychat 10.0 Installer</title>
 <link rel="shortcut icon" href="default_images/icon.png">
-<link rel="stylesheet" href="https://teens.mastivibe.com/chat/css/fontawesome/css/all.css">
+<link rel="stylesheet" href="css/awesome/css/all.min.css">
 <script src="js/jquery-3.5.1.min.js"></script>
 <script src="js/jqueryui/jquery-ui.min.js"></script>
 <script src="js/global.min.js"></script>
